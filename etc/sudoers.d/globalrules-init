@@ -1,0 +1,19 @@
+#General rulles that applies to all servers:
+#File Name = globalrules-init
+#Location = /etc/sudoers.d/
+
+## Host Aliases
+## Groups of machines. You may prefer to use hostnames (perhaps using
+## wildcards for entire domains) or IP addresses instead.
+# Host_Alias     FILESERVERS = fs1, fs2
+# Host_Alias     MAILSERVERS = smtp, smtp2
+
+Host_Alias ALL_SERVERS = ALL  
+
+## Command Aliases
+## These are groups of related commands...
+Cmnd_Alias VIEW = /usr/bin/less, /bin/more  
+
+#Enforce the system security by disallow certain "behave"
+Cmnd_Alias DISALLOW = /bin/su
+

@@ -1,0 +1,7 @@
+#File Name = msg-unix-init
+#Location = /etc/sudoers.d/
+
+#Allow full acess for sysadmins and  Engineers
+%msg-unix ALL=(ALL) NOPASSWD: ALL, !DISALLOW
+
+
