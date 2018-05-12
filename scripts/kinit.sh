@@ -2,7 +2,7 @@
 
 set timeout 20
 set password [lindex $argv 0]
-spawn /usr/bin/kinit join_ad@DOMAIN.COM
+spawn /usr/bin/kinit join-ad@DOMAIN.COM
 expect "DOMAIN.COM"
 send "$password\r";
 interact
