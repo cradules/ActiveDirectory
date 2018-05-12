@@ -20,15 +20,15 @@
 
 BRANCH=master
 NETWORKSYS="/etc/sysconfig/network"
-REPOHOME="/root/puppet-linux-security"
-SSHCFG="/root/puppet-linux-security/etc/ssh/sshd_config"
-SSSDCFG="/root/puppet-linux-security/etc/sssd/sssd.conf"
-KRB5CFG="/root/puppet-linux-security/etc/krb5.conf"
-SUDODCFGS="/root/puppet-linux-security/etc/sudoers.d"
-MAILCFG="/root/puppet-linux-security/etc/mail.rc"
+REPOHOME="/root/ActiveDirectory"
+SSHCFG="/root/ActiveDirectory/etc/ssh/sshd_config"
+SSSDCFG="/root/ActiveDirectory/etc/sssd/sssd.conf"
+KRB5CFG="/root/ActiveDirectory/etc/krb5.conf"
+SUDODCFGS="/root/ActiveDirectory/etc/sudoers.d"
+MAILCFG="/root/ActiveDirectory/etc/mail.rc"
 INSTANCESETUP="/tmp/collectinstancedata.txt"
-JOINREALM="/root/puppet-linux-security/scripts/join.sh"
-KINIT="/root/puppet-linux-security/scripts/kinit.sh"
+JOINREALM="/root/ActiveDirectory/scripts/join.sh"
+KINIT="/root/ActiveDirectory/scripts/kinit.sh"
 
 
 
@@ -76,7 +76,7 @@ function USAGE () {
         yum -y install mailx expect sssd realmd krb5-workstation
 
 #Install certificates
-rsync -aP /root/puppet-linux-security/.certs/ /root/.certs/ 
+rsync -aP /root/ActiveDirectory/.certs/ /root/.certs/ 
 
 
 #Setup HOSTNAME
@@ -125,7 +125,7 @@ rsync -aP /root/puppet-linux-security/.certs/ /root/.certs/
 
 #Rsync sudo rules
 
-rsync -aP /root/puppet-linux-security/etc/sudoers.d/ /etc/sudoers.d/
+rsync -aP /root/ActiveDirectory/etc/sudoers.d/ /etc/sudoers.d/
 
 #Collect instance setup
 	echo "HOSTNAME=$(hostname)" >> $INSTANCESETUP 
