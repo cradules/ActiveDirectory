@@ -64,7 +64,7 @@ function USAGE () {
 	fi
 
 #Install packeges 
-        yum -y install mailx expect sssd realmd krb5-workstation
+        yum -y install mailx expect sssd realmd krb5-workstation samba-common-tools adcli
 
 #Install certificates
 rsync -aP /root/ActiveDirectory/.certs/ /root/.certs/ 
