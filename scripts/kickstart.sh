@@ -5,7 +5,6 @@
 #Author: Constatin Radulescu
 #Version 2.0
 #Description: Kickstart script. Next will be post setup
-#	-hostname
 #	-crontab
 #	-join AD server
 #	-setup krb5
@@ -34,28 +33,20 @@ KINIT="/root/ActiveDirectory/scripts/kinit.sh"
 
 #Usage
 function USAGE () {
-	echo "Usage with hostname:"
-        echo "$0 -h hostname mail-adress joinadpass"
-        echo "Usage with no hostname:"
-        echo "$0 mail-adress joinadpass"
+        echo "$0 joinadpass"
 }
 
 
-	if [[ $# -lt 2 ]]
+	if [[ $# -ne 1 ]]
 		then
 		clear
 		USAGE
 		exit 1
 	fi
-	if [[ $1 = "-h" && $# -eq 4 && $3 = *"@"* ]]
-		then
-		SERVERNAME=$2
-		SENDTO=$3
-		PASSWORDAD=$4
-	elif [[ $# -eq 2 && $1 = *"@"* ]]
+
+	if [[ $# -eq 1 ]]
 		then 
-		SENDTO=$1
-		PASSWORDAD=$2
+		PASSWORDAD=$1
 	else
 		USAGE
 		exit 1
@@ -119,18 +110,8 @@ rsync -aP /root/ActiveDirectory/.certs/ /root/.certs/
 	rsync -aP $SUDODCFGS/ /etc/sudoers.d/
 
 
-#Setup mail.rc
-	mv /etc/mail.rc /etc/mail.rc.orig
-	rsync -aP $MAILCFG /etc/
 
 #Rsync sudo rules
 
 rsync -aP /root/ActiveDirectory/etc/sudoers.d/ /etc/sudoers.d/
 
-#Collect instance setup
-	echo "HOSTNAME=$(hostname)" >> $INSTANCESETUP 
-	$REPOHOME/scripts/ec2-metadata --all >> $INSTANCESETUP
-#Send e-mail
-
-	cat $INSTANCESETUP | mailx -A gmail -s "Build done for $(uname -n)" $SENDTO 2>/dev/null
-rm -rf $INSTANCESETUP $REPOHOME
